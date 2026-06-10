@@ -1,0 +1,96 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <Styles.Resources>
+    <Color x:Key="NeonGreen">#00FFC8</Color>
+    <Color x:Key="NeonGreenDim">#4D00FFC8</Color>
+    <Color x:Key="Background">#080B14</Color>
+    <Color x:Key="SurfaceColor">#0D1117</Color>
+    <Color x:Key="TextPrimary">#E2E8F0</Color>
+    <Color x:Key="TextDim">#94A3B8</Color>
+    <Color x:Key="DangerRed">#EF4444</Color>
+
+    <SolidColorBrush x:Key="NeonGreenBrush" Color="{StaticResource NeonGreen}"/>
+    <SolidColorBrush x:Key="NeonGreenDimBrush" Color="{StaticResource NeonGreenDim}"/>
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource Background}"/>
+    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}"/>
+    <SolidColorBrush x:Key="BorderBrush" Color="#40FFFFFF"/>
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimary}"/>
+    <SolidColorBrush x:Key="TextDimBrush" Color="{StaticResource TextDim}"/>
+    <SolidColorBrush x:Key="DangerBrush" Color="{StaticResource DangerRed}"/>
+
+    <FontFamily x:Key="MonoFont">Courier New,Consolas,monospace</FontFamily>
+  </Styles.Resources>
+
+  <Style Selector="Window">
+    <Setter Property="Background" Value="{StaticResource BackgroundBrush}"/>
+    <Setter Property="FontFamily" Value="Segoe UI,Arial,sans-serif"/>
+    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+  </Style>
+
+  <Style Selector="Button.neon">
+    <Setter Property="Background" Value="Transparent"/>
+    <Setter Property="BorderBrush" Value="{StaticResource NeonGreenDimBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+    <Setter Property="FontFamily" Value="{StaticResource MonoFont}"/>
+    <Setter Property="FontSize" Value="11"/>
+    <Setter Property="Padding" Value="12,7"/>
+    <Setter Property="CornerRadius" Value="4"/>
+    <Setter Property="Cursor" Value="Hand"/>
+  </Style>
+  <Style Selector="Button.neon:pointerover /template/ ContentPresenter">
+    <Setter Property="Background" Value="#1A00FFC8"/>
+    <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+  </Style>
+
+  <Style Selector="Button.neon-primary">
+    <Setter Property="Background" Value="#1A00FFC8"/>
+    <Setter Property="BorderBrush" Value="{StaticResource NeonGreenBrush}"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+    <Setter Property="FontFamily" Value="{StaticResource MonoFont}"/>
+    <Setter Property="FontSize" Value="12"/>
+    <Setter Property="FontWeight" Value="Bold"/>
+    <Setter Property="Padding" Value="12,10"/>
+    <Setter Property="CornerRadius" Value="5"/>
+  </Style>
+
+  <Style Selector="TextBlock.label">
+    <Setter Property="FontFamily" Value="{StaticResource MonoFont}"/>
+    <Setter Property="FontSize" Value="9"/>
+    <Setter Property="Foreground" Value="{StaticResource NeonGreenDimBrush}"/>
+    <Setter Property="LetterSpacing" Value="1.5"/>
+  </Style>
+
+  <Style Selector="TextBlock.mono">
+    <Setter Property="FontFamily" Value="{StaticResource MonoFont}"/>
+  </Style>
+
+  <Style Selector="TextBlock.timestamp">
+    <Setter Property="FontFamily" Value="{StaticResource MonoFont}"/>
+    <Setter Property="FontSize" Value="10"/>
+    <Setter Property="Foreground" Value="#6600FFC8"/>
+    <Setter Property="Width" Value="45"/>
+  </Style>
+
+  <Style Selector="ComboBox.neon">
+    <Setter Property="Background" Value="#0D000000"/>
+    <Setter Property="BorderBrush" Value="#2600FFC8"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Foreground" Value="{StaticResource NeonGreenBrush}"/>
+    <Setter Property="FontFamily" Value="{StaticResource MonoFont}"/>
+    <Setter Property="FontSize" Value="11"/>
+    <Setter Property="CornerRadius" Value="4"/>
+  </Style>
+
+  <Style Selector="TextBox.neon">
+    <Setter Property="Background" Value="#0D000000"/>
+    <Setter Property="BorderBrush" Value="#2600FFC8"/>
+    <Setter Property="BorderThickness" Value="1"/>
+    <Setter Property="Foreground" Value="{StaticResource TextPrimaryBrush}"/>
+    <Setter Property="FontFamily" Value="{StaticResource MonoFont}"/>
+    <Setter Property="FontSize" Value="11"/>
+    <Setter Property="CornerRadius" Value="4"/>
+    <Setter Property="CaretBrush" Value="{StaticResource NeonGreenBrush}"/>
+  </Style>
+</Styles>

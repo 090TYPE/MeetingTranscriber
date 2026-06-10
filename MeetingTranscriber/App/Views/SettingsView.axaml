@@ -1,0 +1,46 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:MeetingTranscriber.App.ViewModels"
+             x:Class="MeetingTranscriber.App.Views.SettingsView"
+             x:DataType="vm:SettingsViewModel">
+  <ScrollViewer>
+    <StackPanel Spacing="16" Margin="20" MaxWidth="500">
+      <TextBlock Text="// SETTINGS" Classes="mono"
+                 FontSize="14" FontWeight="Bold"
+                 Foreground="{StaticResource NeonGreenBrush}"/>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="WHISPER MODEL" Classes="label"/>
+        <ComboBox Classes="neon" ItemsSource="{Binding WhisperModels}"
+                  SelectedItem="{Binding WhisperModel}" HorizontalAlignment="Stretch"/>
+      </StackPanel>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="LANGUAGE" Classes="label"/>
+        <ComboBox Classes="neon" ItemsSource="{Binding Languages}"
+                  SelectedItem="{Binding Language}" HorizontalAlignment="Stretch"/>
+      </StackPanel>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="AI PROVIDER" Classes="label"/>
+        <ComboBox Classes="neon" ItemsSource="{Binding AiProviders}"
+                  SelectedItem="{Binding AiProvider}" HorizontalAlignment="Stretch"/>
+      </StackPanel>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="CLAUDE API KEY" Classes="label"/>
+        <TextBox Classes="neon" Text="{Binding ClaudeApiKey}"
+                 PasswordChar="●" Watermark="sk-ant-..."/>
+      </StackPanel>
+
+      <StackPanel Spacing="4">
+        <TextBlock Text="OPENAI API KEY" Classes="label"/>
+        <TextBox Classes="neon" Text="{Binding OpenAiApiKey}"
+                 PasswordChar="●" Watermark="sk-..."/>
+      </StackPanel>
+
+      <Button Classes="neon-primary" Command="{Binding SaveCommand}"
+              HorizontalAlignment="Left">▶ SAVE SETTINGS</Button>
+    </StackPanel>
+  </ScrollViewer>
+</UserControl>

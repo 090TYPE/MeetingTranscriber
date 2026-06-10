@@ -1,0 +1,22 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        x:Class="MeetingTranscriber.App.Views.DownloadModelWindow"
+        Title="Downloading Whisper Model"
+        Width="420" Height="180"
+        CanResize="False"
+        Background="{StaticResource BackgroundBrush}">
+  <StackPanel Margin="24" Spacing="16">
+    <TextBlock Text="// DOWNLOADING WHISPER MODEL" Classes="mono"
+               FontSize="13" FontWeight="Bold"
+               Foreground="{StaticResource NeonGreenBrush}"/>
+    <TextBlock x:Name="StatusText" Text="Starting download..."
+               Classes="mono" FontSize="11"
+               Foreground="{StaticResource TextDimBrush}"/>
+    <ProgressBar x:Name="Progress" Minimum="0" Maximum="100" Value="0"
+                 Height="4" Foreground="{StaticResource NeonGreenBrush}"
+                 Background="#1500FFC8"/>
+    <TextBlock x:Name="PercentText" Text="0%" Classes="mono" FontSize="10"
+               HorizontalAlignment="Right"
+               Foreground="{StaticResource NeonGreenDimBrush}"/>
+  </StackPanel>
+</Window>

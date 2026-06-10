@@ -1,0 +1,173 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:MeetingTranscriber.App.ViewModels"
+        xmlns:views="clr-namespace:MeetingTranscriber.App.Views"
+        xmlns:controls="clr-namespace:MeetingTranscriber.App.Controls"
+        x:Class="MeetingTranscriber.App.Views.MainWindow"
+        x:DataType="vm:MainViewModel"
+        Title="MEETING_TRANSCRIBER"
+        Width="960" Height="600"
+        MinWidth="800" MinHeight="500"
+        Background="{StaticResource BackgroundBrush}">
+
+  <Grid RowDefinitions="Auto,Auto,*">
+
+    <!-- Title bar -->
+    <Border Grid.Row="0" Background="#0D00FFC8"
+            BorderBrush="#2000FFC8" BorderThickness="0,0,0,1"
+            Padding="12,7">
+      <Grid ColumnDefinitions="Auto,*,Auto">
+        <StackPanel Orientation="Horizontal" Spacing="8">
+          <Ellipse Width="8" Height="8" Fill="{StaticResource NeonGreenBrush}"/>
+          <TextBlock Text="MEETING_TRANSCRIBER" Classes="mono"
+                     FontSize="12" FontWeight="Bold"
+                     Foreground="{StaticResource NeonGreenBrush}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Orientation="Horizontal" Spacing="16">
+          <Border IsVisible="{Binding IsRecording}"
+                  BorderBrush="#6600FFC8" BorderThickness="1"
+                  CornerRadius="3" Padding="7,2">
+            <TextBlock Text="● REC" Classes="mono" FontSize="10"
+                       Foreground="{StaticResource NeonGreenBrush}"/>
+          </Border>
+          <TextBlock Text="{Binding Timer}" Classes="mono"
+                     FontSize="13" FontWeight="Bold" LetterSpacing="2"
+                     Foreground="{StaticResource NeonGreenBrush}"/>
+          <TextBlock Text="{Binding StatusText}" Classes="mono"
+                     FontSize="10" Foreground="{StaticResource TextDimBrush}"/>
+        </StackPanel>
+      </Grid>
+    </Border>
+
+    <!-- Error banner -->
+    <Border Grid.Row="1" Background="#2DEF4444" BorderBrush="#EF4444" BorderThickness="0,0,0,1"
+            IsVisible="{Binding HasError}" Padding="12,8">
+      <Grid ColumnDefinitions="*,Auto">
+        <TextBlock Text="{Binding ErrorMessage}" FontSize="11" Foreground="#EF4444" Classes="mono"
+                   VerticalAlignment="Center"/>
+        <Button Grid.Column="1" Classes="neon" FontSize="10" Padding="6,2"
+                Command="{Binding DismissErrorCommand}">✕</Button>
+      </Grid>
+    </Border>
+
+    <!-- Sidebar + left panel + right panel -->
+    <Grid Grid.Row="2" ColumnDefinitions="44,280,*">
+
+      <!-- Sidebar -->
+      <Border BorderBrush="#1500FFC8" BorderThickness="0,0,1,0">
+        <StackPanel Spacing="4" Margin="0,12">
+          <Button Classes="neon" Padding="4" Width="28" Height="28"
+                  HorizontalAlignment="Center" ToolTip.Tip="Record"
+                  Command="{Binding SwitchToRecordCommand}">🎙</Button>
+          <Button Classes="neon" Padding="4" Width="28" Height="28"
+                  HorizontalAlignment="Center" ToolTip.Tip="History"
+                  Command="{Binding SwitchToHistoryCommand}">📋</Button>
+          <Separator Margin="8,4"/>
+          <Button Classes="neon" Padding="4" Width="28" Height="28"
+                  HorizontalAlignment="Center" ToolTip.Tip="Settings"
+                  Command="{Binding SwitchToSettingsCommand}">⚙</Button>
+        </StackPanel>
+      </Border>
+
+      <!-- History view -->
+      <Border Grid.Column="1" Grid.ColumnSpan="2" IsVisible="{Binding IsHistoryTab}">
+        <views:HistoryView DataContext="{Binding HistoryVM}"/>
+      </Border>
+
+      <!-- Settings view -->
+      <Border Grid.Column="1" Grid.ColumnSpan="2" IsVisible="{Binding IsSettingsTab}">
+        <views:SettingsView DataContext="{Binding SettingsVM}"/>
+      </Border>
+
+      <!-- Left control panel -->
+      <Border Grid.Column="1" BorderBrush="#1500FFC8" BorderThickness="0,0,1,0" Padding="12"
+              IsVisible="{Binding IsRecordTab}">
+        <StackPanel Spacing="10">
+
+          <StackPanel Spacing="4">
+            <TextBlock Text="SOURCE" Classes="label"/>
+            <Grid ColumnDefinitions="*,6,*">
+              <Button Grid.Column="0" Classes="neon-primary"
+                      Command="{Binding StartRecordingCommand}"
+                      IsVisible="{Binding !IsFileMode}">● MIC</Button>
+              <Button Grid.Column="2" Classes="neon"
+                      Command="{Binding OpenFileCommand}">▲ FILE</Button>
+            </Grid>
+          </StackPanel>
+
+          <StackPanel Spacing="4">
+            <TextBlock Text="WAVEFORM" Classes="label"/>
+            <Border BorderBrush="#2500FFC8" BorderThickness="1" CornerRadius="5"
+                    Padding="8" Background="#0A000000">
+              <controls:WaveformControl Height="40" Samples="{Binding WaveformSamples}"/>
+            </Border>
+          </StackPanel>
+
+          <Button Classes="neon-primary" IsVisible="{Binding IsRecording}"
+                  Command="{Binding StopRecordingCommand}">
+            <StackPanel Orientation="Horizontal" Spacing="8">
+              <Border Width="10" Height="10" Background="{StaticResource DangerBrush}"
+                      CornerRadius="2"/>
+              <TextBlock Text="STOP RECORDING"/>
+            </StackPanel>
+          </Button>
+
+          <StackPanel Spacing="4">
+            <TextBlock Text="AI SUMMARY" Classes="label"/>
+            <Button Classes="neon" HorizontalAlignment="Stretch"
+                    Command="{Binding SummarizeCommand}">▶ GENERATE SUMMARY</Button>
+          </StackPanel>
+
+          <StackPanel Spacing="4">
+            <TextBlock Text="EXPORT" Classes="label"/>
+            <Grid ColumnDefinitions="*,5,*,5,*">
+              <Button Grid.Column="0" Classes="neon" Command="{Binding ExportTxtCommand}">TXT</Button>
+              <Button Grid.Column="2" Classes="neon" Command="{Binding ExportPdfCommand}">PDF</Button>
+              <Button Grid.Column="4" Classes="neon" Command="{Binding ExportSrtCommand}">SRT</Button>
+            </Grid>
+          </StackPanel>
+
+        </StackPanel>
+      </Border>
+
+      <!-- Right panel: transcript + summary -->
+      <Grid Grid.Column="2" RowDefinitions="Auto,*,Auto" Margin="12"
+            IsVisible="{Binding IsRecordTab}">
+
+        <Border BorderBrush="#1500FFC8" BorderThickness="0,0,0,1">
+          <StackPanel Orientation="Horizontal" Spacing="0">
+            <Border BorderBrush="{StaticResource NeonGreenBrush}" BorderThickness="0,0,0,2"
+                    Padding="0,0,16,6">
+              <TextBlock Text="TRANSCRIPT" Classes="mono" FontSize="10"
+                         Foreground="{StaticResource NeonGreenBrush}"/>
+            </Border>
+            <TextBlock Text="SUMMARY" Classes="mono" FontSize="10"
+                       Foreground="{StaticResource TextDimBrush}" Padding="0,0,16,6"/>
+          </StackPanel>
+        </Border>
+
+        <ScrollViewer Grid.Row="1" Margin="0,8,0,0">
+          <ItemsControl ItemsSource="{Binding TranscriptLines}">
+            <ItemsControl.ItemTemplate>
+              <DataTemplate>
+                <Grid ColumnDefinitions="50,*" Margin="0,3">
+                  <TextBlock Grid.Column="0" Classes="timestamp"
+                             Text="{Binding TimestampFormatted}"/>
+                  <TextBlock Grid.Column="1" Text="{Binding Text}"
+                             FontSize="12" TextWrapping="Wrap"
+                             Foreground="{StaticResource TextPrimaryBrush}"/>
+                </Grid>
+              </DataTemplate>
+            </ItemsControl.ItemTemplate>
+          </ItemsControl>
+        </ScrollViewer>
+
+        <Border Grid.Row="2" BorderBrush="#1500FFC8" BorderThickness="0,1,0,0" Padding="0,6,0,0">
+          <TextBlock Text="{Binding TranscriptLines.Count, StringFormat='{}{0} lines'}"
+                     Classes="mono" FontSize="10"
+                     Foreground="{StaticResource TextDimBrush}"/>
+        </Border>
+      </Grid>
+    </Grid>
+  </Grid>
+</Window>

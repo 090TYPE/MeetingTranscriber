@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="MeetingTranscriber.Tests/MeetingTranscriber.Tests.csproj" />
+  <Project Path="MeetingTranscriber/MeetingTranscriber.csproj" />
+</Solution>

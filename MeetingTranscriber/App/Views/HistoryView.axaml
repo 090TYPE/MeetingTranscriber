@@ -1,0 +1,43 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:vm="clr-namespace:MeetingTranscriber.App.ViewModels"
+             x:Class="MeetingTranscriber.App.Views.HistoryView"
+             x:DataType="vm:HistoryViewModel">
+  <Grid ColumnDefinitions="260,*" Margin="12">
+    <StackPanel Spacing="8">
+      <TextBox Classes="neon" Watermark="// search sessions..."
+               Text="{Binding SearchQuery}"/>
+      <ListBox ItemsSource="{Binding Sessions}"
+               SelectedItem="{Binding SelectedSession}"
+               Background="Transparent">
+        <ListBox.ItemTemplate>
+          <DataTemplate>
+            <StackPanel Spacing="2" Margin="4">
+              <TextBlock Text="{Binding Title}" FontSize="12"
+                         Foreground="{StaticResource TextPrimaryBrush}"/>
+              <TextBlock Classes="mono" FontSize="9"
+                         Foreground="{StaticResource TextDimBrush}"
+                         Text="{Binding CreatedAt, StringFormat='{}{0:yyyy-MM-dd HH:mm}'}"/>
+            </StackPanel>
+          </DataTemplate>
+        </ListBox.ItemTemplate>
+      </ListBox>
+    </StackPanel>
+
+    <ScrollViewer Grid.Column="1" Margin="12,0,0,0">
+      <ItemsControl ItemsSource="{Binding SelectedLines}">
+        <ItemsControl.ItemTemplate>
+          <DataTemplate>
+            <Grid ColumnDefinitions="50,*" Margin="0,3">
+              <TextBlock Grid.Column="0" Classes="timestamp"
+                         Text="{Binding TimestampFormatted}"/>
+              <TextBlock Grid.Column="1" Text="{Binding Text}"
+                         TextWrapping="Wrap" FontSize="12"
+                         Foreground="{StaticResource TextPrimaryBrush}"/>
+            </Grid>
+          </DataTemplate>
+        </ItemsControl.ItemTemplate>
+      </ItemsControl>
+    </ScrollViewer>
+  </Grid>
+</UserControl>
