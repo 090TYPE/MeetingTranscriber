@@ -21,9 +21,9 @@ public class SettingsServiceTests : IDisposable
     {
         var svc = new SettingsService(_dir);
         var s = svc.Load();
-        Assert.Equal("medium", s.WhisperModel);
+        Assert.Equal("tiny", s.WhisperModel);
         Assert.Equal("auto", s.Language);
-        Assert.Equal(15, s.ChunkSeconds);
+        Assert.Equal(8, s.ChunkSeconds);
     }
 
     [Fact]
