@@ -5,6 +5,7 @@
 ![Platform](https://img.shields.io/badge/platform-Windows-blue)
 ![.NET](https://img.shields.io/badge/.NET-8.0-purple)
 ![Avalonia](https://img.shields.io/badge/Avalonia-11.2-teal)
+[![CI](https://github.com/090TYPE/MeetingTranscriber/actions/workflows/ci.yml/badge.svg)](https://github.com/090TYPE/MeetingTranscriber/actions/workflows/ci.yml)
 
 ---
 
